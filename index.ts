@@ -1,25 +1,19 @@
-import fastify from "fastify";
-import { join } from 'path';
-import { ItemsController } from "./controllers/ItemsController";
-import { request } from "https";
-import { registerRoutes } from './routes/index';
+const fastify = require("fastify")();
 
-const app = require('fastify')();
-
-
-app.register(require("point-of-view"), {
-    engine: {
-        ejs: require("ejs"),
-    },
+fastify.register(require("@fastify/view"), {
+        engine: {
+                ejs: require("ejs"),
+        },
 });
 
-app.get('/', (req, res) => {
-    return res.view("/templates/index.ejs");
+fastify.get('/', (req: any, res: any) => {
+        res.view("/templates/index.ejs");
 });
 
+fastify.listen({host: '0.0.0.0', port: 8300}, (err: any) => {
+        if (err) {
+                console.error(err);
+        }
 
-app.listen(8300, () => {
-    console.log("Server Started !")
+        console.log(`Server listening...`);
 });
-
-// registerRoutes(app);

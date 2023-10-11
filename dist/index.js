@@ -1,15 +1,16 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const app = require('fastify')();
-app.register(require("point-of-view"), {
+const fastify = require("fastify")();
+fastify.register(require("@fastify/view"), {
     engine: {
         ejs: require("ejs"),
     },
 });
-app.get('/', (req, res) => {
-    return res.view("/templates/index.ejs");
+fastify.get('/', (req, res) => {
+    res.view("/templates/index.ejs");
 });
-app.listen(8300, () => {
-    console.log("Server Started !");
+fastify.listen({ host: '0.0.0.0', port: 8300 }, (err) => {
+    if (err) {
+        console.error(err);
+    }
+    console.log(`Server listening...`);
 });
-// registerRoutes(app);
