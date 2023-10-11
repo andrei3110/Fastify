@@ -1,0 +1,4 @@
+
+server.altair.one ansible_port=8101  ansible_user=andrey ansible_pass=TgtzouPi
+
+
